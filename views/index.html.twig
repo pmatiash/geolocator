@@ -1,0 +1,39 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+    <h1>Hello my young padawan!</h1>
+    <h2>Your IP address is {{ clientIp }}</h2>
+    <a
+        id="btnGetGeo"
+        class="btn btn-default"
+        href="#"
+        data-client-ip = "{{ clientIp }}"
+    >get the Jeddy's location!</a>
+    <div id="visitorDataContainer" style="display: none;"></div>
+    <div id="errorContainer" style="display: none;"></div>
+
+    <script type="application/javascript">
+        $(document).ready(function(){
+            $("#btnGetGeo").click(function(){
+                var $button = $(this);
+                var clientIp = $button.data('client-ip');
+                $.post({
+                    type: "post",
+                    url: "geolocation",
+                    data: {clientIp: clientIp},
+                    success: function(response){
+                        $('#errorContainer').hide();
+                        $('#visitorDataContainer').html(response);
+                        $('#visitorDataContainer').show();
+                    },
+                    error: function(response) {
+                        $('#visitorDataContainer').hide();
+                        $('#errorContainer').html(response);
+                        $('#errorContainer').show();
+                    },
+                    dataType: "html"
+                });
+            });
+        });
+    </script>
+{% endblock %}

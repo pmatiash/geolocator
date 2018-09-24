@@ -1,0 +1,13 @@
+{
+    "name": "matiash-app",
+    "description": "Geolocation application developed by Pavlo Matiash",
+    "require": {
+        "silex/silex": "~2.0",
+        "symfony/asset": "~2.8|^3.0",
+        "symfony/twig-bridge": "~2.8|^3.0",
+        "doctrine/dbal": "~2.2"
+    },
+    "autoload": {
+        "psr-4": { "MatiashApp\\": "src/" }
+    }
+}
